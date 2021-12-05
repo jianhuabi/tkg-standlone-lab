@@ -1,0 +1,17 @@
+keys/*
+!keys/.gitkeep
+config.yaml
+.secrets
+tkg-extensions
+tkg-extensions-manifests*.gz
+acme_fitness_demo
+tmc.token
+sensitive/
+params.yaml
+generated/
+.DS_Store
+local-config/*
+!local-config/.gitkeep
+crashd/*
+!crashd/.gitkeep
+.envrc

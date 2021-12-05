@@ -1,0 +1,48 @@
+iaas: aws # aws or vsphere
+vmware-id: michaelbi
+environment-name: tkg-aws-e2-lab # used for aws ssh key name
+subdomain: tkg-aws-e2-lab.winterfell.be
+lets-encrypt-acme-email: mbi@vmware.com
+dns:
+  provider: aws-route53
+aws:
+  region: us-west-2
+  access-key-id: REDACTED
+  secret-access-key: REDACTED
+  hosted-zone-id: Z0618830Z9136GF6C81B # clear this value out to start, and script will generate a new zone for you
+  control-plane-machine-type: c5.xlarge # eg. c5.xlarge or m4.xlarge
+  node-machine-type: c5.2xlarge # eg. c5.xlarge or m4.xlarge
+  aws_ami_id: ami-0293f31158f5c72f3
+  profile: default
+vsphere:
+  server: vcenter7.hyrulelab.com
+  username: administrator@vsphere.local
+  password: "REDACTED_VALUE_KEEP_DOUBLE_QUOTES"
+  insecure: true
+  datastore: datastore2
+  template-folder: /Datacenter/vm/tkg
+  datacenter: /Datacenter
+  network: TKG-VLAN14-PG
+  tls-thumbprint: F4:31:AC:BA:98:19:8C:94:BD:3E:49:63:C7:9C:66:0E:D6:61:1E:19
+  resource-pool: /Datacenter/host/Cluster/Resources/tkg
+  local-ova-folder: /Users/jaguilar/Code/tkg/
+  node-os: photon
+management-cluster:
+  worker-replicas: 2
+  name: dragonstone
+  ingress-fqdn: '*.dragonstone.tkg-aws-e2-lab.winterfell.be'
+  pinniped-fqdn: pinniped.dragonstone.tkg-aws-e2-lab.winterfell.be
+  prometheus-fqdn: prometheus.dragonstone.tkg-aws-e2-lab.winterfell.be
+  grafana-fqdn: grafana.dragonstone.tkg-aws-e2-lab.winterfell.be
+  controlplane-endpoint: 192.168.7.180 # only required for vsphere iaas, must belog to avi-management-cluster-vip-network-cidr
+harbor:
+  admin-password: "VMware1!"
+  harbor-cn: harbor.dragonstone.tkg-aws-e2-lab.winterfell.be
+#  blob-storage:
+#    type: s3 # Default is PVC, and can optionally be S3/MinIO
+#    regionendpoint: http://minio.server:9000 # Not required for AWS S3
+#    region: us-east-1
+#    access-key-id: REDACTED
+#    secret-access-key: REDACTED
+#    bucket: harbor-storage
+#    secure: false # set to true for HTTPS endpoints
