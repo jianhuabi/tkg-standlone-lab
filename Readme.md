@@ -151,7 +151,7 @@ tanzu-system-ingress   envoy                  LoadBalancer   100.67.100.205   a8
 To install `Harbor`, you simply need to follow below script. 
 
 
->Note: For my script, I leverage aws route53 DNS server to resolve Harbor homepage URL. You could simply leverage IP address but you need to replace Harbor clusterissuer selfsign yaml with your public access IPs
+>Note: For my script, I leverage aws route53 DNS server to resolve Harbor homepage URL. You could simply leverage IP address but you need to replace Harbor clusterissuer selfsign yaml with your public access IPs. If you are leverging public signed Harbor certificate, you must first login to Route53 to prepare a `CNAME` record with domain set to someting like `*.YOURCLUSTER.tkg-aws-e2-lab.winterfell.be`
 
 ```bash
 ./scripts/07-deploy-harbor-with-selfsign.sh
@@ -171,3 +171,10 @@ https://harbor.dragonstone.tkg-aws-e2-lab.winterfell.be/
 ```bash
 ./scripts/99-clean-all.sh
 ```
+
+
+## TAP Installation Labs Scripts
+
+The following labs can be run to deploy TAP.
+
+#### [Deploy Tanzu Application Platform beta 0.4.0-build.12](docs/tap.md)

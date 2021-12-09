@@ -10,6 +10,7 @@ export KUBECONFIG=~/.kube-tkg/config
 
 kubectl config use-context $MANAGEMENT_CLUSTER_NAME-admin@$MANAGEMENT_CLUSTER_NAME
 
+tanzu package repository add tanzu-standard --url projects.registry.vmware.com/tkg/packages/standard/repo:v1.4.0  --namespace tanzu-kapp --create-namespace
 
 kubectl apply -f tkg-extensions-mods-examples/tanzu-kapp-namespace.yaml
 kubectl apply -f storage-classes/default-storage-class-$IAAS.yaml
