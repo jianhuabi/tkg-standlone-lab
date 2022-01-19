@@ -1,0 +1,5 @@
+CLUSTER_NAME: # Added by scripts
+REGION: # Added by scripts
+DO_NODE_SIZE:   # Added by scripts
+DO_NODE_COUNT: # Added by scripts
+DO_K8S_VERSION: # Added by scripts

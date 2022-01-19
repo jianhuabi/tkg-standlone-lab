@@ -6,9 +6,15 @@ source $TKG_LAB_SCRIPTS/set-env.sh
 CLUSTER_NAME=$(yq e .management-cluster.name $PARAMS_YAML)
 IAAS=$(yq e .iaas $PARAMS_YAML)
 
-export KUBECONFIG=~/.kube-tkg/config
+if [ "$IAAS" = "do" ];
+then
+    export KUBECONFIG=$(pwd)/.kube-config
+else
 
-kubectl config use-context $CLUSTER_NAME-admin@$CLUSTER_NAME
+    export KUBECONFIG=~/.kube-tkg/config
+
+    kubectl config use-context $CLUSTER_NAME-admin@$CLUSTER_NAME
+fi
 
 VERSION=$(tanzu package available list cert-manager.tanzu.vmware.com -oyaml -n tanzu-kapp | yq eval ".[0].version" -)
 

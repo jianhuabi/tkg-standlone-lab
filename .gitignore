@@ -15,3 +15,8 @@ local-config/*
 crashd/*
 !crashd/.gitkeep
 .envrc
+.kube-config
+test-build/*
+tanzu-cluster-essentials/*
+tanzu-cluster-essentials*.tgz
+local_kind

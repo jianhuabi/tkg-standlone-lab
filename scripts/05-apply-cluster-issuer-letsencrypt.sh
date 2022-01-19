@@ -4,13 +4,19 @@ source $TKG_LAB_SCRIPTS/set-env.sh
 
 CLUSTER_NAME=$(yq e .management-cluster.name $PARAMS_YAML)
 
-export KUBECONFIG=~/.kube-tkg/config
+IAAS=$(yq e .iaas $PARAMS_YAML)
 
-kubectl config use-context $CLUSTER_NAME-admin@$CLUSTER_NAME
+if [ "$IAAS" = "do" ];
+then
+    export KUBECONFIG=$(pwd)/.kube-config
+else
+
+    export KUBECONFIG=~/.kube-tkg/config
+
+    kubectl config use-context $CLUSTER_NAME-admin@$CLUSTER_NAME
+fi
 
 mkdir -p generated/$CLUSTER_NAME/contour/
-
-IAAS=$(yq e .iaas $PARAMS_YAML)
 
 export LETS_ENCRYPT_ACME_EMAIL=$(yq e .lets-encrypt-acme-email $PARAMS_YAML)
 
