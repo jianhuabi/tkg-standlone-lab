@@ -37,7 +37,7 @@ kubectl apply -f generated/$SHAREDSVC_CLUSTER_NAME/harbor/03-certs.yaml
 # Wait for cert to be ready
 while kubectl get certificates -n tanzu-system-registry harbor-cert | grep True ; [ $? -ne 0 ]; do
 	echo Harbor certificate is not yet ready
-	sleep 5s
+	sleep 5
 done
 # Read Harbor certificate details and store in files
 export HARBOR_CERT_CRT=$(kubectl get secret harbor-cert-tls -n tanzu-system-registry -o=jsonpath={.data."tls\.crt"} | base64 --decode)
